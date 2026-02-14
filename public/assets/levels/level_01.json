@@ -1,0 +1,71 @@
+{
+  "id": "level_01",
+  "name": "Pirate Cove",
+  "background": { "type": "color", "color": "#1a3a5c" },
+  "music": null,
+  "spawn": { "x": 0, "y": 0, "z": 2 },
+  "navMesh": {
+    "vertices": [
+      [-8, 0, -8],
+      [-8, 0, 8],
+      [8, 0, 8],
+      [8, 0, -8],
+      [-3, 0, -3],
+      [3, 0, -3],
+      [3, 0, 3],
+      [-3, 0, 3]
+    ],
+    "faces": [
+      [0, 1, 7],
+      [0, 7, 4],
+      [0, 4, 5],
+      [0, 5, 3],
+      [3, 5, 2],
+      [5, 6, 2],
+      [2, 6, 1],
+      [1, 6, 7],
+      [4, 7, 6],
+      [4, 6, 5]
+    ]
+  },
+  "hotspots": [
+    {
+      "id": "chest_01",
+      "name": "Treasure Chest",
+      "position": { "x": 3, "y": 0, "z": -2 },
+      "radius": 1.0,
+      "interactionRadius": 2.0,
+      "dialogue": {
+        "lines": [
+          { "speaker": "Pirate", "text": "Arr! A locked treasure chest. I wonder what be inside...", "audio": "", "duration": 3.0 },
+          { "speaker": "Pirate", "text": "I'll need a key to open this. Best keep lookin' around.", "audio": "", "duration": 3.0 }
+        ]
+      }
+    },
+    {
+      "id": "barrel_01",
+      "name": "Old Barrel",
+      "position": { "x": -3, "y": 0, "z": -3 },
+      "radius": 0.8,
+      "interactionRadius": 1.5,
+      "dialogue": {
+        "lines": [
+          { "speaker": "Pirate", "text": "An old rum barrel. Empty, unfortunately.", "audio": "", "duration": 2.5 }
+        ]
+      }
+    },
+    {
+      "id": "teleport_02",
+      "name": "Path to the Docks",
+      "type": "teleport",
+      "position": { "x": -6, "y": 0, "z": 0 },
+      "radius": 1.0,
+      "interactionRadius": 1.5,
+      "target": { "levelId": "level_02", "spawnId": "from_level_01" }
+    }
+  ],
+  "spawns": {
+    "default": { "x": 0, "y": 0, "z": 2 },
+    "from_level_02": { "x": -3, "y": 0, "z": 1 }
+  }
+}

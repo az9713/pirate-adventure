@@ -1,0 +1,63 @@
+{
+  "id": "level_02",
+  "name": "The Docks",
+  "background": { "type": "color", "color": "#0d2b45" },
+  "music": null,
+  "spawn": { "x": 0, "y": 0, "z": 3 },
+  "navMesh": {
+    "vertices": [
+      [-6, 0, -6],
+      [-6, 0, 6],
+      [6, 0, 6],
+      [6, 0, -6],
+      [0, 0, 0]
+    ],
+    "faces": [
+      [0, 1, 4],
+      [1, 2, 4],
+      [2, 3, 4],
+      [3, 0, 4]
+    ]
+  },
+  "hotspots": [
+    {
+      "id": "dock_npc",
+      "name": "Old Sailor",
+      "position": { "x": 2, "y": 0, "z": -3 },
+      "radius": 1.0,
+      "interactionRadius": 2.0,
+      "dialogue": {
+        "lines": [
+          { "speaker": "Old Sailor", "text": "Ahoy there, matey! Welcome to the docks.", "audio": "", "duration": 3.0 },
+          { "speaker": "Old Sailor", "text": "Be careful 'round here. Strange things happen at night...", "audio": "", "duration": 3.5 },
+          { "speaker": "Pirate", "text": "I'll keep me eyes open. Thanks for the warning.", "audio": "", "duration": 3.0 }
+        ]
+      }
+    },
+    {
+      "id": "crate_01",
+      "name": "Shipping Crate",
+      "position": { "x": -3, "y": 0, "z": -2 },
+      "radius": 0.8,
+      "interactionRadius": 1.5,
+      "dialogue": {
+        "lines": [
+          { "speaker": "Pirate", "text": "A shipping crate marked 'FRAGILE'. Wonder what's inside.", "audio": "", "duration": 3.0 }
+        ]
+      }
+    },
+    {
+      "id": "teleport_01",
+      "name": "Path to the Cove",
+      "type": "teleport",
+      "position": { "x": 5, "y": 0, "z": 0 },
+      "radius": 1.0,
+      "interactionRadius": 1.5,
+      "target": { "levelId": "level_01", "spawnId": "from_level_02" }
+    }
+  ],
+  "spawns": {
+    "default": { "x": 0, "y": 0, "z": 3 },
+    "from_level_01": { "x": 2, "y": 0, "z": 1 }
+  }
+}

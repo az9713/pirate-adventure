@@ -1,0 +1,185 @@
+#ui-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 100;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#ui-overlay > .dialogue-box,
+#ui-overlay > .editor-panel,
+#ui-overlay > .editor-toggle {
+  pointer-events: auto;
+}
+
+/* Dialogue Box */
+.dialogue-box {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(90%, 600px);
+  background: rgba(10, 10, 30, 0.92);
+  border: 2px solid rgba(255, 200, 80, 0.6);
+  border-radius: 12px;
+  padding: 16px 20px;
+  color: #fff;
+  display: none;
+  cursor: pointer;
+  user-select: none;
+  backdrop-filter: blur(4px);
+}
+
+.dialogue-box.visible {
+  display: block;
+}
+
+.dialogue-speaker {
+  font-size: 14px;
+  font-weight: bold;
+  color: #ffc850;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.dialogue-text {
+  font-size: 16px;
+  line-height: 1.5;
+  min-height: 1.5em;
+}
+
+.dialogue-advance {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.5);
+  text-align: right;
+  margin-top: 8px;
+}
+
+/* Editor Panel */
+.editor-panel {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(20, 20, 40, 0.9);
+  border: 1px solid rgba(100, 100, 200, 0.4);
+  border-radius: 8px;
+  padding: 12px;
+  color: #fff;
+  font-size: 13px;
+  display: none;
+  max-width: 280px;
+  backdrop-filter: blur(4px);
+}
+
+.editor-panel.visible {
+  display: block;
+}
+
+.editor-panel h3 {
+  margin: 0 0 8px 0;
+  font-size: 14px;
+  color: #8888ff;
+}
+
+.editor-panel button {
+  display: block;
+  width: 100%;
+  padding: 6px 10px;
+  margin: 4px 0;
+  background: rgba(80, 80, 180, 0.5);
+  border: 1px solid rgba(100, 100, 200, 0.6);
+  border-radius: 4px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.editor-panel button:hover {
+  background: rgba(100, 100, 220, 0.7);
+}
+
+/* Editor toggle */
+.editor-toggle {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: rgba(20, 20, 40, 0.8);
+  border: 1px solid rgba(100, 100, 200, 0.4);
+  border-radius: 6px;
+  padding: 6px 12px;
+  color: #aaa;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.editor-toggle:hover {
+  color: #fff;
+  background: rgba(40, 40, 80, 0.9);
+}
+
+/* Loading overlay */
+.loading-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #0a0a1e;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  z-index: 1000;
+  transition: opacity 0.5s;
+}
+
+.loading-overlay.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.loading-text {
+  font-size: 24px;
+  font-weight: bold;
+  color: #ffc850;
+}
+
+.loading-bar-container {
+  width: 200px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  margin-top: 16px;
+  overflow: hidden;
+}
+
+.loading-bar {
+  width: 0%;
+  height: 100%;
+  background: #ffc850;
+  border-radius: 2px;
+  transition: width 0.3s;
+}
+
+/* Transition overlay */
+.transition-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s;
+  z-index: 999;
+}
+
+.transition-overlay.active {
+  opacity: 1;
+}
