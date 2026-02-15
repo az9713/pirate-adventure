@@ -18,6 +18,12 @@ export class CharacterLoader {
       if ((child as THREE.Mesh).isMesh) {
         child.castShadow = true;
         child.receiveShadow = true;
+        // Fix FBX conversion artifacts: metalness defaults to 1.0
+        const mat = (child as THREE.Mesh).material as THREE.MeshStandardMaterial;
+        if (mat.isMeshStandardMaterial) {
+          mat.metalness = 0;
+          mat.roughness = 0.8;
+        }
       }
     });
 

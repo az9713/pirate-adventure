@@ -19,6 +19,9 @@ import { UIOverlay } from './ui/UIOverlay';
 import { DialogueBox } from './ui/DialogueBox';
 import { EditorPanel } from './ui/EditorPanel';
 import { LevelEditor } from './editor/LevelEditor';
+import { InventoryUI } from './inventory/InventoryUI';
+import { CollectibleManager } from './collectibles/CollectibleManager';
+import { VictoryScreen } from './ui/VictoryScreen';
 import type { Vec3 } from './types/GameTypes';
 import type { LevelData } from './types/LevelTypes';
 
@@ -37,7 +40,11 @@ export class Game {
   private uiOverlay!: UIOverlay;
   private dialogueBox!: DialogueBox;
   private levelEditor!: LevelEditor;
+  private inventoryUI!: InventoryUI;
+  private collectibleManager!: CollectibleManager;
+  private victoryScreen!: VictoryScreen;
   private inDialogue = false;
+  private startTime = Date.now();
 
   constructor(container: HTMLElement) {
     this.htmlContainer = container;
@@ -121,6 +128,15 @@ export class Game {
     // Dialogue system
     new DialogueSystem(this.dialogueBox, this.audioManager);
 
+    // Inventory UI
+    this.inventoryUI = new InventoryUI(this.uiOverlay.container);
+
+    // Collectibles
+    this.collectibleManager = new CollectibleManager(this.engine.scene);
+
+    // Victory screen
+    this.victoryScreen = new VictoryScreen(this.uiOverlay.container);
+
     // Editor
     this.levelEditor = new LevelEditor(
       this.engine.scene,
@@ -148,6 +164,10 @@ export class Game {
       this.uiOverlay.fadeFromBlack();
       this.clickToMove.setEnabled(true);
     });
+    eventBus.on('game:victory', () => {
+      this.clickToMove.setEnabled(false);
+      this.victoryScreen.show(this.startTime);
+    });
 
     // Load first level
     await this.levelManager.loadLevel('level_01');
@@ -167,6 +187,7 @@ export class Game {
     }
 
     this.hotspotManager.update(dt, this.characterController.getPosition());
+    this.collectibleManager.update(dt, this.characterController.getPosition());
 
     // Follow camera
     const pos = this.characterModel.position;
@@ -179,6 +200,7 @@ export class Game {
     this.characterController.setPosition(spawn.x, spawn.y, spawn.z);
     this.characterController.stop();
     this.levelEditor.loadLevel(data);
+    this.collectibleManager.loadCollectibles(data.collectibles ?? []);
   };
 
   private createFallbackCharacter(): THREE.Group {
@@ -213,10 +235,13 @@ export class Game {
     this.cameraController.dispose();
     this.clickToMove.dispose();
     this.hotspotManager.dispose();
+    this.collectibleManager.dispose();
     this.levelManager.dispose();
     this.audioManager.dispose();
     this.uiOverlay.dispose();
     this.dialogueBox.dispose();
+    this.inventoryUI.dispose();
+    this.victoryScreen.dispose();
     this.levelEditor.dispose();
     this.engine.dispose();
     eventBus.clear();

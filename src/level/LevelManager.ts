@@ -1,10 +1,11 @@
 import * as THREE from 'three';
 import { eventBus } from '../core/EventBus';
+import { assetLoader } from '../core/AssetLoader';
 import { NavMesh } from '../navigation/NavMesh';
 import { HotspotManager } from '../interaction/HotspotManager';
 import { Background } from './Background';
 import type { AudioManager } from '../audio/AudioManager';
-import type { LevelData } from '../types/LevelTypes';
+import type { LevelData, DecorationDef } from '../types/LevelTypes';
 
 export class LevelManager {
   private scene: THREE.Scene;
@@ -64,6 +65,11 @@ export class LevelManager {
     // Hotspots
     this.hotspotManager.loadHotspots(data.hotspots);
 
+    // Decorations (async, non-blocking)
+    if (data.decorations) {
+      this.loadDecorations(data.decorations);
+    }
+
     // Music
     if (data.music) {
       this.audioManager.playMusic(data.music.src, data.music.volume, data.music.loop);
@@ -93,6 +99,27 @@ export class LevelManager {
     this.hotspotManager.clear();
     this.background.clear();
     this.audioManager.stopMusic();
+  }
+
+  private loadDecorations(defs: DecorationDef[]): void {
+    for (const def of defs) {
+      assetLoader.loadGLTF(def.model).then((gltf) => {
+        const model = gltf.scene.clone();
+        model.position.set(def.position.x, def.position.y, def.position.z);
+        model.scale.setScalar(def.scale ?? 1);
+        model.rotation.y = def.rotationY ?? 0;
+        model.name = `decoration_${def.id}`;
+        model.traverse((child) => {
+          if ((child as THREE.Mesh).isMesh) {
+            child.castShadow = true;
+            child.receiveShadow = true;
+          }
+        });
+        this.levelGroup.add(model);
+      }).catch((e) => {
+        console.warn(`Failed to load decoration ${def.model}:`, e);
+      });
+    }
   }
 
   private onTeleport = (target: { levelId: string; spawnId: string }): void => {

@@ -28,6 +28,11 @@
       [4, 6, 5]
     ]
   },
+  "collectibles": [
+    { "id": "coin_l1_1", "type": "coin", "position": { "x": 1, "y": 0, "z": 0 } },
+    { "id": "coin_l1_2", "type": "coin", "position": { "x": -2, "y": 0, "z": 3 } },
+    { "id": "coin_l1_3", "type": "coin", "position": { "x": 5, "y": 0, "z": 1 } }
+  ],
   "hotspots": [
     {
       "id": "chest_01",
@@ -35,24 +40,47 @@
       "position": { "x": 3, "y": 0, "z": -2 },
       "radius": 1.0,
       "interactionRadius": 2.0,
+      "model": "glb/props/chest.glb",
+      "modelScale": 0.4,
       "dialogue": {
         "lines": [
           { "speaker": "Pirate", "text": "Arr! A locked treasure chest. I wonder what be inside...", "audio": "", "duration": 3.0 },
           { "speaker": "Pirate", "text": "I'll need a key to open this. Best keep lookin' around.", "audio": "", "duration": 3.0 }
         ]
-      }
+      },
+      "requiresItem": "key",
+      "alternateDialogue": {
+        "lines": [
+          { "speaker": "Pirate", "text": "This rusty key... it fits!", "audio": "", "duration": 2.5 },
+          { "speaker": "Pirate", "text": "The chest creaks open, revealin' a mountain of gold!", "audio": "", "duration": 3.0 },
+          { "speaker": "Pirate", "text": "We did it! The treasure be ours!", "audio": "", "duration": 3.0 }
+        ]
+      },
+      "consumesItem": "key",
+      "victory": true
     },
     {
       "id": "barrel_01",
       "name": "Old Barrel",
+      "type": "item",
       "position": { "x": -3, "y": 0, "z": -3 },
       "radius": 0.8,
       "interactionRadius": 1.5,
+      "model": "glb/props/barrel.glb",
+      "modelScale": 0.4,
       "dialogue": {
         "lines": [
-          { "speaker": "Pirate", "text": "An old rum barrel. Empty, unfortunately.", "audio": "", "duration": 2.5 }
+          { "speaker": "Pirate", "text": "An old rum barrel... wait, there be a bottle of rum still inside!", "audio": "", "duration": 3.0 },
+          { "speaker": "Pirate", "text": "This might come in handy. I'll take it.", "audio": "", "duration": 2.5 }
         ]
-      }
+      },
+      "givesItem": {
+        "id": "rum",
+        "name": "Rum Bottle",
+        "icon": "\ud83c\udf7e",
+        "description": "A bottle of fine pirate rum. Someone might want this."
+      },
+      "oneShot": true
     },
     {
       "id": "teleport_02",
@@ -63,6 +91,20 @@
       "interactionRadius": 1.5,
       "target": { "levelId": "level_02", "spawnId": "from_level_01" }
     }
+  ],
+  "decorations": [
+    { "id": "palm_1", "model": "glb/environment/palm-bend.glb", "position": { "x": 6, "y": 0, "z": -5 }, "scale": 0.8, "rotationY": 0.5 },
+    { "id": "palm_2", "model": "glb/environment/palm-straight.glb", "position": { "x": -5, "y": 0, "z": 5 }, "scale": 0.8, "rotationY": 2.1 },
+    { "id": "palm_3", "model": "glb/environment/palm-detailed-bend.glb", "position": { "x": 7, "y": 0, "z": 4 }, "scale": 0.7, "rotationY": 3.8 },
+    { "id": "rocks_1", "model": "glb/environment/rocks-sand-a.glb", "position": { "x": -6, "y": 0, "z": -6 }, "scale": 0.3 },
+    { "id": "rocks_2", "model": "glb/environment/rocks-b.glb", "position": { "x": 5, "y": 0, "z": -6 }, "scale": 0.25 },
+    { "id": "rocks_3", "model": "glb/environment/rocks-sand-b.glb", "position": { "x": -7, "y": 0, "z": 3 }, "scale": 0.2 },
+    { "id": "grass_1", "model": "glb/environment/grass-patch.glb", "position": { "x": 2, "y": 0, "z": 4 }, "scale": 0.4 },
+    { "id": "grass_2", "model": "glb/environment/grass-plant.glb", "position": { "x": -1, "y": 0, "z": -5 }, "scale": 0.3 },
+    { "id": "wreck_1", "model": "glb/environment/ship-wreck.glb", "position": { "x": -7, "y": 0, "z": -2 }, "scale": 0.5, "rotationY": 1.2 },
+    { "id": "boat_1", "model": "glb/environment/boat-row-small.glb", "position": { "x": 7, "y": 0, "z": 1 }, "scale": 0.25, "rotationY": -0.4 },
+    { "id": "flag_1", "model": "glb/props/flag-pirate.glb", "position": { "x": 4, "y": 0, "z": -3 }, "scale": 0.4 },
+    { "id": "cannon_1", "model": "glb/props/cannon.glb", "position": { "x": 6, "y": 0, "z": -3 }, "scale": 0.35, "rotationY": -1.5 }
   ],
   "spawns": {
     "default": { "x": 0, "y": 0, "z": 2 },

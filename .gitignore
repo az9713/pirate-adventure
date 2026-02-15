@@ -12,6 +12,12 @@ dist
 dist-ssr
 *.local
 
+# Downloaded asset archives (large, not needed for runtime)
+public/assets/downloads/
+
+# Original FBX file (converted to GLB)
+*.fbx
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

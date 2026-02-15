@@ -17,3 +17,10 @@ export interface Vec3 {
   y: number;
   z: number;
 }
+
+export interface ItemDef {
+  id: string;
+  name: string;
+  icon: string;
+  description: string;
+}

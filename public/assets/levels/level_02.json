@@ -19,6 +19,11 @@
       [3, 0, 4]
     ]
   },
+  "collectibles": [
+    { "id": "coin_l2_1", "type": "coin", "position": { "x": -1, "y": 0, "z": 2 } },
+    { "id": "coin_l2_2", "type": "coin", "position": { "x": 4, "y": 0, "z": -2 } },
+    { "id": "coin_l2_3", "type": "coin", "position": { "x": -4, "y": 0, "z": -1 } }
+  ],
   "hotspots": [
     {
       "id": "dock_npc",
@@ -26,11 +31,51 @@
       "position": { "x": 2, "y": 0, "z": -3 },
       "radius": 1.0,
       "interactionRadius": 2.0,
+      "model": "glb/props/crate-bottles.glb",
+      "modelScale": 0.4,
       "dialogue": {
         "lines": [
           { "speaker": "Old Sailor", "text": "Ahoy there, matey! Welcome to the docks.", "audio": "", "duration": 3.0 },
-          { "speaker": "Old Sailor", "text": "Be careful 'round here. Strange things happen at night...", "audio": "", "duration": 3.5 },
-          { "speaker": "Pirate", "text": "I'll keep me eyes open. Thanks for the warning.", "audio": "", "duration": 3.0 }
+          { "speaker": "Old Sailor", "text": "I could really use a drink... ye wouldn't happen to have any rum?", "audio": "", "duration": 3.5 },
+          { "speaker": "Pirate", "text": "Not at the moment. I'll keep an eye out.", "audio": "", "duration": 3.0 }
+        ]
+      },
+      "requiresItem": "rum",
+      "consumesItem": "rum",
+      "alternateDialogue": {
+        "lines": [
+          { "speaker": "Pirate", "text": "I found this bottle of rum. Fancy a drink?", "audio": "", "duration": 3.0 },
+          { "speaker": "Old Sailor", "text": "Bless ye soul, matey! That's just what I needed!", "audio": "", "duration": 3.0 },
+          { "speaker": "Old Sailor", "text": "Here, take this rusty key I found. Might open somethin' valuable.", "audio": "", "duration": 3.5 },
+          { "speaker": "Old Sailor", "text": "Oh, and I'll wake up that lazy guard for ye too.", "audio": "", "duration": 3.0 }
+        ]
+      },
+      "givesItem": {
+        "id": "key",
+        "name": "Rusty Key",
+        "icon": "\ud83d\udddd\ufe0f",
+        "description": "A rusty old key. Looks like it could open a chest."
+      }
+    },
+    {
+      "id": "guard_01",
+      "name": "Sleeping Guard",
+      "position": { "x": -3, "y": 0, "z": -4 },
+      "radius": 1.0,
+      "interactionRadius": 2.0,
+      "model": "glb/props/barrel.glb",
+      "modelScale": 0.4,
+      "dialogue": {
+        "lines": [
+          { "speaker": "Pirate", "text": "A guard, fast asleep. He's blockin' the way.", "audio": "", "duration": 3.0 },
+          { "speaker": "Pirate", "text": "Maybe someone 'round here can help wake him up.", "audio": "", "duration": 3.0 }
+        ]
+      },
+      "requiresItem": "key",
+      "alternateDialogue": {
+        "lines": [
+          { "speaker": "Guard", "text": "*yawn* Wha... who goes there?!", "audio": "", "duration": 2.5 },
+          { "speaker": "Guard", "text": "Oh, the sailor woke me up. Carry on then, ye scallywag.", "audio": "", "duration": 3.0 }
         ]
       }
     },
@@ -40,6 +85,8 @@
       "position": { "x": -3, "y": 0, "z": -2 },
       "radius": 0.8,
       "interactionRadius": 1.5,
+      "model": "glb/props/crate.glb",
+      "modelScale": 0.4,
       "dialogue": {
         "lines": [
           { "speaker": "Pirate", "text": "A shipping crate marked 'FRAGILE'. Wonder what's inside.", "audio": "", "duration": 3.0 }
@@ -55,6 +102,20 @@
       "interactionRadius": 1.5,
       "target": { "levelId": "level_01", "spawnId": "from_level_02" }
     }
+  ],
+  "decorations": [
+    { "id": "dock_1", "model": "glb/environment/structure-platform-dock.glb", "position": { "x": 0, "y": 0, "z": -5 }, "scale": 0.3 },
+    { "id": "dock_2", "model": "glb/environment/structure-platform-dock-small.glb", "position": { "x": 3, "y": 0, "z": -5 }, "scale": 0.3 },
+    { "id": "platform_1", "model": "glb/environment/platform-planks.glb", "position": { "x": -2, "y": 0, "z": -5 }, "scale": 0.3 },
+    { "id": "rocks_1", "model": "glb/environment/rocks-a.glb", "position": { "x": -5, "y": 0, "z": -5 }, "scale": 0.25 },
+    { "id": "rocks_2", "model": "glb/environment/rocks-c.glb", "position": { "x": 5, "y": 0, "z": -5 }, "scale": 0.2 },
+    { "id": "fence_1", "model": "glb/environment/structure-fence.glb", "position": { "x": -4, "y": 0, "z": -3 }, "scale": 0.3, "rotationY": 1.57 },
+    { "id": "palm_1", "model": "glb/environment/palm-bend.glb", "position": { "x": -5, "y": 0, "z": 4 }, "scale": 0.8, "rotationY": 1.0 },
+    { "id": "palm_2", "model": "glb/environment/palm-straight.glb", "position": { "x": 5, "y": 0, "z": 4 }, "scale": 0.8 },
+    { "id": "tower_1", "model": "glb/environment/tower-watch.glb", "position": { "x": -5, "y": 0, "z": -1 }, "scale": 0.2, "rotationY": 0.8 },
+    { "id": "flag_1", "model": "glb/props/flag-pirate-high.glb", "position": { "x": 4, "y": 0, "z": -4 }, "scale": 0.4 },
+    { "id": "cannon_1", "model": "glb/props/cannon.glb", "position": { "x": 1, "y": 0, "z": -4 }, "scale": 0.35, "rotationY": 3.14 },
+    { "id": "bottle_1", "model": "glb/props/bottle.glb", "position": { "x": 3, "y": 0, "z": -2 }, "scale": 0.3 }
   ],
   "spawns": {
     "default": { "x": 0, "y": 0, "z": 3 },

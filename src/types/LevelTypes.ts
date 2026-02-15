@@ -1,4 +1,4 @@
-import type { Vec3, HotspotType } from './GameTypes';
+import type { Vec3, HotspotType, ItemDef } from './GameTypes';
 
 export interface BackgroundDef {
   type: 'color' | 'image' | 'video';
@@ -37,6 +37,29 @@ export interface HotspotDef {
   interactionRadius: number;
   dialogue?: DialogueDef;
   target?: TeleportTarget;
+  givesItem?: ItemDef;
+  requiresItem?: string;
+  consumesItem?: string;
+  alternateDialogue?: DialogueDef;
+  oneShot?: boolean;
+  victory?: boolean;
+  model?: string;
+  modelScale?: number;
+  modelRotationY?: number;
+}
+
+export interface DecorationDef {
+  id: string;
+  model: string;
+  position: Vec3;
+  scale?: number;
+  rotationY?: number;
+}
+
+export interface CollectibleDef {
+  id: string;
+  type: 'coin';
+  position: Vec3;
 }
 
 export interface NavMeshDef {
@@ -52,5 +75,7 @@ export interface LevelData {
   spawn: Vec3;
   navMesh: NavMeshDef;
   hotspots: HotspotDef[];
+  collectibles?: CollectibleDef[];
+  decorations?: DecorationDef[];
   spawns: Record<string, Vec3>;
 }
