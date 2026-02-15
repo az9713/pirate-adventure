@@ -2,6 +2,12 @@ import * as THREE from 'three';
 import { GLTFLoader, type GLTF } from 'three/addons/loaders/GLTFLoader.js';
 import type { AssetIndex } from '../types/AssetTypes';
 
+const BASE = import.meta.env.BASE_URL;
+
+export function assetUrl(path: string): string {
+  return `${BASE}assets/${path}`;
+}
+
 export class AssetLoader {
   private gltfLoader = new GLTFLoader();
   private cache = new Map<string, GLTF>();
@@ -9,7 +15,7 @@ export class AssetLoader {
 
   async loadIndex(): Promise<AssetIndex> {
     if (this.index) return this.index;
-    const resp = await fetch('/assets/index.json');
+    const resp = await fetch(assetUrl('index.json'));
     this.index = (await resp.json()) as AssetIndex;
     return this.index;
   }
@@ -19,7 +25,7 @@ export class AssetLoader {
 
     return new Promise((resolve, reject) => {
       this.gltfLoader.load(
-        `/assets/${path}`,
+        assetUrl(path),
         (gltf) => {
           this.cache.set(path, gltf);
           resolve(gltf);
@@ -31,7 +37,7 @@ export class AssetLoader {
   }
 
   async loadTexture(path: string): Promise<THREE.Texture> {
-    return new THREE.TextureLoader().loadAsync(`/assets/${path}`);
+    return new THREE.TextureLoader().loadAsync(assetUrl(path));
   }
 
   getIndex(): AssetIndex | null {

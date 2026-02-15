@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { assetUrl } from '../core/AssetLoader';
 
 export class AudioManager {
   private listener: THREE.AudioListener;
@@ -28,7 +29,7 @@ export class AudioManager {
   playMusic(src: string, volume = 0.3, loop = true): void {
     this.stopMusic();
 
-    this.audioLoader.load(`/assets/${src}`, (buffer) => {
+    this.audioLoader.load(assetUrl(src), (buffer) => {
       this.musicAudio.setBuffer(buffer);
       this.musicAudio.setLoop(loop);
       this.musicAudio.setVolume(volume);
@@ -45,7 +46,7 @@ export class AudioManager {
   playDialogue(src: string, volume = 0.8): void {
     this.stopDialogue();
 
-    this.audioLoader.load(`/assets/${src}`, (buffer) => {
+    this.audioLoader.load(assetUrl(src), (buffer) => {
       this.dialogueAudio.setBuffer(buffer);
       this.dialogueAudio.setLoop(false);
       this.dialogueAudio.setVolume(volume);

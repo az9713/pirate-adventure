@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { assetUrl } from '../core/AssetLoader';
 import type { BackgroundDef } from '../types/LevelTypes';
 
 export class Background {
@@ -18,7 +19,7 @@ export class Background {
         break;
       case 'image':
         if (def.src) {
-          new THREE.TextureLoader().load(`/assets/${def.src}`, (tex) => {
+          new THREE.TextureLoader().load(assetUrl(def.src), (tex) => {
             this.scene.background = tex;
           });
         }
@@ -26,7 +27,7 @@ export class Background {
       case 'video':
         if (def.src) {
           const video = document.createElement('video');
-          video.src = `/assets/${def.src}`;
+          video.src = assetUrl(def.src);
           video.loop = true;
           video.muted = true;
           video.play();

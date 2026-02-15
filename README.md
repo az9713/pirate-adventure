@@ -12,7 +12,7 @@ legendary treasure chest!
   /_____\
 ```
 
-**[Play the Game](https://az9713.github.io/pirate-adventure/)** (coming soon)
+**[Play the Game](https://az9713.github.io/pirate-adventure/)**
 
 ## Screenshots
 

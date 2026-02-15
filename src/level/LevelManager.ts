@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import { eventBus } from '../core/EventBus';
-import { assetLoader } from '../core/AssetLoader';
+import { assetLoader, assetUrl } from '../core/AssetLoader';
 import { NavMesh } from '../navigation/NavMesh';
 import { HotspotManager } from '../interaction/HotspotManager';
 import { Background } from './Background';
@@ -38,7 +38,7 @@ export class LevelManager {
   async loadLevel(levelId: string, spawnId?: string): Promise<LevelData> {
     this.unloadCurrent();
 
-    const resp = await fetch(`/assets/levels/${levelId}.json`);
+    const resp = await fetch(assetUrl(`levels/${levelId}.json`));
     const data: LevelData = await resp.json();
     this.currentLevel = data;
 
