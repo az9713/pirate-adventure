@@ -1,0 +1,15 @@
+{
+  "characters": {
+    "pirate": {
+      "skeleton": { "file": "glb/character/Characters_Captain_Barbarossa.glb", "scale": 0.008 },
+      "animations": {
+        "file": "glb/character/Characters_Captain_Barbarossa.glb",
+        "clips": [
+          { "name": "Idle", "originalName": "Idle", "duration": 2.0, "loop": true },
+          { "name": "Walk", "originalName": "Walk", "duration": 1.0, "loop": true },
+          { "name": "Run", "originalName": "Run", "duration": 0.7, "loop": true }
+        ]
+      }
+    }
+  }
+}
